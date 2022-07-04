@@ -24,6 +24,11 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.jumbotron{
+  margin: 0px, auto;
+  pading: 70px 30px 70px 30px;
+  
+}
 
 .App-link {
   color: #61dafb;

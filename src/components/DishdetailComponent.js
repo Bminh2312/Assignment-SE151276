@@ -1,67 +1,70 @@
-import { Component } from "react";
-import { Card, CardImg } from "reactstrap";
-
-class DishDetail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedDish: this.props.selectedDish,
-    };
-  }
-  renderDish() {
-    if (this.props.selectedDish != null) {
+import React, { Component } from 'react';
+import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
+//import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+    
+class Dishdetail extends Component {
+   
+/*   constructor(props) {
+      super(props);
+   }
+*/
+   
+   renderDish(dish) {
       return (
-        <Card>
-          <CardImg
-            top
-            src={this.props.selectedDish.image}
-            alt={this.props.selectedDish.name}
-          />
-          <div className="p-2">
-            <div className="text-center uppercase mb-2">
-              <strong>{this.props.selectedDish.name}</strong>
-            </div>
-            <div className="text-left">
-              {this.props.selectedDish.description}
-            </div>
-          </div>
-        </Card>
+         <div className="col-12 col-md-5 m-1">
+            <Card>
+               <CardImg top src={dish.image} alt={dish.name} />
+               <CardBody>
+                  <CardTitle>{dish.name}</CardTitle>
+                  <CardText>{dish.description}</CardText>
+               </CardBody>
+            </Card>
+         </div>
       );
-    } else return <div></div>;
-  }
-  renderDishComment() {
-    if (this.props.selectedDish != null) {
-      return (
-        <Card>
-          <div className="bg-[#FCF8E8] text-[#DF7861] p-2 h-[540px] leading-relaxed">
-            {this.props.selectedDish.comments.map((item) => {
-              var date = new Date(item.date);
-              return (
-                <div key={item.id} className="font-semibold text-left mb-5">
-                  <h5>{item.comment}</h5>
-                  <span>
-                    By: <strong>{item.author}</strong>, {date.toDateString()}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </Card>
-      );
-    } else return <div></div>;
-  }
-  render() {
-    return (
-      <div className="row">
-        <div className="col-12 col-md-5 m-2 gap-4">
-          {this.renderDish(this.props.selectedDish)}
-        </div>
-        <div className="col-12 col-md-5 m-2 gap-4">
-          {this.renderDishComment(this.props.selectedDish)}
-        </div>
-      </div>
-    );
-  }
+   }
+   
+   renderComments(comments) {
+      if (comments != null) {
+         return (
+            <div className="col-12 col-md-5 m-1">
+               <h4>Comments</h4>
+               <ul className="list-unstyled">
+               {comments.map((comment) => {
+                  return (
+                     <li key={comment.id}>
+                       <p>{comment.comment}</p>
+                       <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                     </li>
+                  );
+                })}
+                </ul>
+            </div>
+         );
+      }
+      else {
+         return (
+            <div></div>
+         );
+      }
+   }
+   
+   render() {
+      if (this.props.dish != null) {
+         return (
+            <div className="container">
+               <div className="row">
+                  {this.renderDish(this.props.dish)}
+                  {this.renderComments(this.props.dish.comments)}
+               </div>
+            </div>
+         );
+      }
+      else {
+         return (
+            <div></div> 
+         );
+      }
+   }
 }
 
-export default DishDetail;
+export default Dishdetail;
