@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap-social/bootstrap-social.css';
+=======
+>>>>>>> 1fd9365 (Initialize project using Create React App)
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
